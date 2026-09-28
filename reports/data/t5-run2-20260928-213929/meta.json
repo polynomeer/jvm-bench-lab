@@ -1,0 +1,11 @@
+{
+  "scenario": "t5",
+  "run": 2,
+  "heap": "-Xms1g -Xmx1g",
+  "jmh_forks": 3,
+  "jmh_warmup_iterations": 5,
+  "jmh_measurement_iterations": 5,
+  "host": "Darwin arm64",
+  "container_cpus": 2,
+  "git_commit": "unknown"
+}

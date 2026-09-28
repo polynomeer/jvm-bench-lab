@@ -1,0 +1,10 @@
+# Resource limits first. Microbenchmarks are more sensitive to them than anything else in these
+# labs: 2 CPUs and a fixed heap keep the JIT's decisions and the GC's out of the comparison.
+name: jvm-bench-lab
+
+services:
+  bench:
+    build:
+      context: ../build/bench
+    cpus: 2
+    mem_limit: 2g

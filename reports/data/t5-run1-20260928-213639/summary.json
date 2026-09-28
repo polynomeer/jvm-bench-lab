@@ -1,0 +1,148 @@
+{
+ "run": 1,
+ "heap": "-Xms1g -Xmx1g",
+ "jmh": {
+  "blackholeOverhead": {
+   "score": 1.0903299008975291,
+   "error": 0.02851635931457435,
+   "unit": "ns/op",
+   "forks": 3
+  },
+  "megamorphic": {
+   "score": 3.472004576651973,
+   "error": 0.03102011489131595,
+   "unit": "ns/op",
+   "forks": 3
+  },
+  "mix": {
+   "score": 1.0989003209660486,
+   "error": 0.02729047396598682,
+   "unit": "ns/op",
+   "forks": 3
+  },
+  "monomorphic": {
+   "score": 1.0971716772319937,
+   "error": 0.025973643428205347,
+   "unit": "ns/op",
+   "forks": 3
+  },
+  "sumArray": {
+   "score": 616.2487369654027,
+   "error": 6.016408022135918,
+   "unit": "ns/op",
+   "forks": 3
+  }
+ },
+ "rows": [
+  {
+   "id": "f1-dead-code",
+   "label": "Dead code elimination",
+   "method": "mix",
+   "naive_ns": 0.04309584,
+   "jmh_ns": 1.0989003209660486,
+   "vs_jmh": -25.49898832383934,
+   "vs_control": -21.34954696323357,
+   "control_id": "f1-with-sink"
+  },
+  {
+   "id": "f1-with-sink",
+   "label": "A static field instead of a Blackhole",
+   "method": "mix",
+   "naive_ns": 0.92007666,
+   "jmh_ns": 1.0989003209660486,
+   "vs_jmh": -1.1943573494909094,
+   "vs_control": null,
+   "control_id": null
+  },
+  {
+   "id": "f2-constant-folded",
+   "label": "Constant folding",
+   "method": "mix",
+   "naive_ns": 0.0793825,
+   "jmh_ns": 1.0989003209660486,
+   "vs_jmh": -13.843105482518801,
+   "vs_control": -12.310343463609739,
+   "control_id": "f2-non-constant"
+  },
+  {
+   "id": "f2-non-constant",
+   "label": "Control for folding: a run-time argument",
+   "method": "mix",
+   "naive_ns": 0.97722584,
+   "jmh_ns": 1.0989003209660486,
+   "vs_jmh": -1.1245100937630226,
+   "vs_control": null,
+   "control_id": null
+  },
+  {
+   "id": "f3-cold",
+   "label": "No warmup: the interpreter and C1",
+   "method": "mix",
+   "naive_ns": 18.166,
+   "jmh_ns": 1.0989003209660486,
+   "vs_jmh": 16.531071702691087,
+   "vs_control": 19.147080311619945,
+   "control_id": "f3-warm"
+  },
+  {
+   "id": "f3-warm",
+   "label": "Control for warmup: the same loop, compiled",
+   "method": "mix",
+   "naive_ns": 0.94876084,
+   "jmh_ns": 1.0989003209660486,
+   "vs_jmh": -1.1582479742376894,
+   "vs_control": null,
+   "control_id": null
+  },
+  {
+   "id": "f4-timer-per-iteration",
+   "label": "A timer call around every operation",
+   "method": "mix",
+   "naive_ns": 20.9186842,
+   "jmh_ns": 1.0989003209660486,
+   "vs_jmh": 19.03601609799357,
+   "vs_control": 13.637727743842852,
+   "control_id": "f4-timer-around-loop"
+  },
+  {
+   "id": "f4-timer-around-loop",
+   "label": "Control for the timer: one pair for the loop",
+   "method": "mix",
+   "naive_ns": 1.5338834,
+   "jmh_ns": 1.0989003209660486,
+   "vs_jmh": 1.39583488214068,
+   "vs_control": null,
+   "control_id": null
+  },
+  {
+   "id": "f5-monomorphic",
+   "label": "A shared call site that has seen one type",
+   "method": "monomorphic",
+   "naive_ns": 0.6698925,
+   "jmh_ns": 1.0971716772319937,
+   "vs_jmh": -1.6378324540609033,
+   "vs_control": null,
+   "control_id": null
+  },
+  {
+   "id": "f5-after-pollution",
+   "label": "The same site after three types passed through it (not reproduced)",
+   "method": "monomorphic",
+   "naive_ns": 0.64829918,
+   "jmh_ns": 1.0971716772319937,
+   "vs_jmh": -1.6923847986850666,
+   "vs_control": -1.0333076466331486,
+   "control_id": "f5-monomorphic"
+  },
+  {
+   "id": "array-sum",
+   "label": "Array sum, warmed, result accumulated",
+   "method": "sumArray",
+   "naive_ns": 623.554438,
+   "jmh_ns": 616.2487369654027,
+   "vs_jmh": 1.0118551172543944,
+   "vs_control": null,
+   "control_id": null
+  }
+ ]
+}

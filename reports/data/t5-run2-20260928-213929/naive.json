@@ -1,0 +1,13 @@
+[
+  {"id": "f1-dead-code", "what": "mix(i), result discarded", "ops": 50000000, "elapsed_ns": 2240625, "ns_per_op": 0.0448125},
+  {"id": "f1-with-sink", "what": "mix(i), accumulated into a static field", "ops": 50000000, "elapsed_ns": 47314958, "ns_per_op": 0.94629916},
+  {"id": "f2-constant-folded", "what": "mix(SEED), a constant argument", "ops": 50000000, "elapsed_ns": 3688834, "ns_per_op": 0.07377668},
+  {"id": "f2-non-constant", "what": "mix(runtime value + i)", "ops": 50000000, "elapsed_ns": 47721000, "ns_per_op": 0.95442},
+  {"id": "f3-cold", "what": "first 1,000 iterations, no warmup", "ops": 1000, "elapsed_ns": 19666, "ns_per_op": 19.666},
+  {"id": "f3-warm", "what": "same loop, warmed", "ops": 50000000, "elapsed_ns": 44614083, "ns_per_op": 0.89228166},
+  {"id": "f4-timer-per-iteration", "what": "nanoTime around every call", "ops": 5000000, "elapsed_ns": 102961396, "ns_per_op": 20.5922792},
+  {"id": "f4-timer-around-loop", "what": "one nanoTime pair for the loop", "ops": 5000000, "elapsed_ns": 6976417, "ns_per_op": 1.3952834},
+  {"id": "f5-monomorphic", "what": "runOp's call site has seen one type", "ops": 50000000, "elapsed_ns": 33925917, "ns_per_op": 0.67851834},
+  {"id": "f5-after-pollution", "what": "the same call site, after it has seen three types", "ops": 50000000, "elapsed_ns": 31915500, "ns_per_op": 0.63831},
+  {"id": "array-sum", "what": "sumArray over 1,024 ints, warmed", "ops": 2000000, "elapsed_ns": 1213811209, "ns_per_op": 606.9056045}
+]
